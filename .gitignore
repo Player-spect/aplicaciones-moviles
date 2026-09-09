@@ -1,0 +1,52 @@
+# Archivos de compilación y empaquetado
+*.apk
+*.ap_
+*.aab
+*.aar
+*.dex
+*.class
+/build/
+*/build/
+bin/
+gen/
+out/
+
+# Archivos de Gradle
+.gradle/
+gradle/wrapper/gradle-wrapper.jar
+
+# Configuración local (¡Muy importante no subirlo!)
+local.properties
+
+# Archivos de IntelliJ / Android Studio
+*.iml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/gradle.xml
+.idea/assetWizardSettings.xml
+.idea/dictionaries
+.idea/libraries
+.idea/modules.xml
+.idea/caches
+.idea/navEditor.xml
+.navigation/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Archivos de Log y bases de datos temporales
+*.log
+*.sqlite
+
+# Archivos del sistema operativo
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Keystore (Descomenta si vas a generar un APK firmado y no quieres subir las claves)
+# *.jks
+# *.keystore
