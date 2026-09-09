@@ -4,4 +4,9 @@
     <string name="title_activity_recovery">RecoveryActivity</string>
     <string name="title_activity_create_password">CreatePassword</string>
     <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_main_menu">MainMenu</string>
+    <string name="title_activity_user_crud">UserCRUD_Activity</string>
+    <string name="title_activity_register_user">RegisterUser</string>
+    <string name="title_activity_adapter_user">AdapterUser</string>
+    <string name="title_activity_list_users">ListUsers</string>
 </resources>

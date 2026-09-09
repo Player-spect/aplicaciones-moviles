@@ -23,7 +23,7 @@
             android:id="@+id/imgLogo"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/img"
             android:layout_marginBottom="16dp"
             android:contentDescription="Logo Municipalidad" />
 

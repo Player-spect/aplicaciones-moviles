@@ -45,7 +45,8 @@ class MainActivity : AppCompatActivity() {
                 .setContentText("Credenciales validadas correctamente")
                 .setConfirmButton("Continuar") { sDialog ->
                     sDialog.dismissWithAnimation()
-                    // Para despues
+                    val Intent = Intent(this, MainMenu::class.java)
+                    startActivity(Intent)
 
                 }
                 .show()
