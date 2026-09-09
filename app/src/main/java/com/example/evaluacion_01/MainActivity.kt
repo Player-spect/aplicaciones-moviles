@@ -1,5 +1,6 @@
 package com.example.evaluacion_01
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Button
@@ -18,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         val etEmail = findViewById<EditText>(R.id.etEmail)
         val etPassword = findViewById<EditText>(R.id.etPassword)
         val btnIngresar = findViewById<Button>(R.id.btnIngresar)
-        val tvRegistrarme = findViewById<TextView>(R.id.tvRegistrarme)
+        val tvRegister = findViewById<TextView>(R.id.tvRegistrarme)
         val tvOlvidasteClave = findViewById<TextView>(R.id.tvOlvidasteClave)
 
         // Configurar INGRESAR
@@ -50,13 +51,15 @@ class MainActivity : AppCompatActivity() {
                 .show()
         }
 
-        // 3. Configurar clics de los textos (Para Puntos 3, 4 y 5)
-        tvRegistrarme.setOnClickListener {
+        tvRegister.setOnClickListener {
+            val Intent = Intent(this, RegisterActivity::class.java)
+            startActivity(Intent)
             // Registrar usuarios
         }
 
         tvOlvidasteClave.setOnClickListener {
-            // Recuperar contrasennia
+            val intent = Intent(this, RecoveryActivity::class.java)
+            startActivity(intent)
         }
     }
 

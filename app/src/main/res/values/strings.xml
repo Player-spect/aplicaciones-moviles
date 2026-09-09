@@ -2,4 +2,6 @@
     <string name="app_name">evaluacion_01</string>
     <string name="title_activity_recoverry">activity_recoverry</string>
     <string name="title_activity_recovery">RecoveryActivity</string>
+    <string name="title_activity_create_password">CreatePassword</string>
+    <string name="title_activity_register">RegisterActivity</string>
 </resources>

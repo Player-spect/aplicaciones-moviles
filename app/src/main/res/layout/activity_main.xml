@@ -7,7 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@color/bg_gris_0"
     android:padding="32dp">
 
     <LinearLayout
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:text="Sistema de Gestion Municipaldad"
             android:textSize="18sp"
-            android:textColor="#333333"
+            android:textColor="@color/bg_gris_80"
             android:layout_marginBottom="32dp" />
 
         <!-- Campo Usuario/Email -->
@@ -67,8 +67,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="INGRESAR"
-            android:backgroundTint="#FF0000"
-            android:textColor="#FFFFFF"
+            android:backgroundTint="@color/bg_muni"
+            android:textColor="@color/bg_gris_0"
             android:paddingHorizontal="32dp"
             android:layout_marginBottom="24dp"/>
 
@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Registrarme"
-            android:textColor="#FF0000"
+            android:textColor="@color/bg_muni"
             android:textStyle="bold"
             android:layout_marginBottom="8dp" />
 
@@ -87,7 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="¿Olvide mi Contraseña?"
-            android:textColor="#FF0000"
+            android:textColor="@color/bg_muni"
             android:textStyle="bold" />
 
     </LinearLayout>

@@ -29,16 +29,22 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".activity_recoverry"
-                android:exported="false"
-                android:label="@string/title_activity_recoverry"
-                android:theme="@style/Theme.Evaluacion_01"
-                android:windowSoftInputMode="adjustResize" />
-        <activity
                 android:name=".RecoveryActivity"
                 android:exported="false"
                 android:label="@string/title_activity_recovery"
-                android:theme="@style/Theme.Evaluacion_01"
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+                android:windowSoftInputMode="adjustResize" />
+        <activity
+                android:name=".CreatePassword"
+                android:exported="false"
+                android:label="@string/title_activity_create_password"
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+                android:windowSoftInputMode="adjustResize" />
+        <activity
+                android:name=".RegisterActivity"
+                android:exported="false"
+                android:label="@string/title_activity_register"
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar"
                 android:windowSoftInputMode="adjustResize" />
     </application>
 
