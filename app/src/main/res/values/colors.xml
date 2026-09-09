@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="bg_muni">#AD0000</color>
+    <color name="bg_muni_v1">#b33d00</color>
+    <color name="bg_muni_v2">#cc6600</color>
+    <color name="bg_muni_v3">#e08000</color>
+    <color name="bg_muni_v4">#f2b500</color>
+
+    <color name="bg_gris_0">#ffffff</color>
+    <color name="bg_gris_10">#e6e6e6</color>
+    <color name="bg_gris_20">#cccccc</color>
+    <color name="bg_gris_30">#b3b3b3</color>
+    <color name="bg_gris_40">#999999</color>
+    <color name="bg_gris_50">#808080</color>
+    <color name="bg_gris_60">#666666</color>
+    <color name="bg_gris_70">#4d4d4d</color>
+    <color name="bg_gris_80">#333333</color>
+    <color name="bg_gris_90">#1a1a1a</color>
+    <color name="bg_gris_100">#000000</color>
 </resources>
