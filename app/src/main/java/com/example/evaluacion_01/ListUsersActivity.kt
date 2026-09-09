@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.pedant.SweetAlert.SweetAlertDialog
 
-class ListUsers : AppCompatActivity() {
+class ListUsersActivity : AppCompatActivity() {
 
     private lateinit var adapter: AdapterUser
     private lateinit var recyclerUsuarios: RecyclerView

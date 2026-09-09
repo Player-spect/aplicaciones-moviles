@@ -15,13 +15,13 @@ class UserCRUD_Activity : AppCompatActivity() {
 
         // registrar usuarios
         btnCrearUsuarioCrud.setOnClickListener {
-             val intent = Intent(this, RegisterUsers::class.java)
+             val intent = Intent(this, RegisterUsersActivity::class.java)
              startActivity(intent)
         }
 
         // Administracion
         btnListarUsuarios.setOnClickListener {
-            val intent = Intent(this, ListUsers::class.java)
+            val intent = Intent(this, ListUsersActivity::class.java)
             startActivity(intent)
         }
     }

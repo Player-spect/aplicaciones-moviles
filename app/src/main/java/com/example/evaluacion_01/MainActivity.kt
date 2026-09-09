@@ -40,24 +40,15 @@ class MainActivity : AppCompatActivity() {
             }
 
             // Si pasa las validaciones, simulamos el ingreso exitoso
-            SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
-                .setTitleText("¡Éxito!")
-                .setContentText("Credenciales validadas correctamente")
-                .setConfirmButton("Continuar") { sDialog ->
-                    sDialog.dismissWithAnimation()
-                    val Intent = Intent(this, MainMenu::class.java)
-                    startActivity(Intent)
-
-                }
-                .show()
+            val Intent = Intent(this, MainMenuActivity::class.java)
+            startActivity(Intent)
         }
-
+            // Registrar usuarios
         tvRegister.setOnClickListener {
             val Intent = Intent(this, RegisterActivity::class.java)
             startActivity(Intent)
-            // Registrar usuarios
         }
-
+            // Password Recovery
         tvOlvidasteClave.setOnClickListener {
             val intent = Intent(this, RecoveryActivity::class.java)
             startActivity(intent)

@@ -9,4 +9,6 @@
     <string name="title_activity_register_user">RegisterUser</string>
     <string name="title_activity_adapter_user">AdapterUser</string>
     <string name="title_activity_list_users">ListUsers</string>
+    <string name="title_activity_sesors">sesorsActivity</string>
+    <string name="title_activity_portafolio">PortafolioActivity</string>
 </resources>

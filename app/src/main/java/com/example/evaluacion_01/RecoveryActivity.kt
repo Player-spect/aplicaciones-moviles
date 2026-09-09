@@ -42,7 +42,7 @@ class RecoveryActivity : AppCompatActivity() {
                 .setContentText("Revisa tu bandeja de entrada")
                 .setConfirmButton("Ingresar Nueva Clave") { sDialog ->
                     sDialog.dismissWithAnimation()
-                    val Intent = Intent(this, CreatePassword::class.java)
+                    val Intent = Intent(this, CreatePasswordActivity::class.java)
                     startActivity(Intent)
                 }
                 .show()

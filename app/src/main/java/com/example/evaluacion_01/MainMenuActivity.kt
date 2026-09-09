@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class MainMenu : AppCompatActivity() {
+class MainMenuActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_menu)
@@ -33,10 +33,14 @@ class MainMenu : AppCompatActivity() {
 
         // Sensores
         btnDatosSensor.setOnClickListener {
+            val Intent = Intent(this, SensorsActivity::class.java)
+            startActivity(Intent)
         }
 
         // Portafolio
         btnDesarrollador.setOnClickListener {
+            val Intent = Intent(this, PortafolioActivity::class.java)
+            startActivity(Intent)
         }
     }
 }
