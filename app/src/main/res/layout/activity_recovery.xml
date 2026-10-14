@@ -52,27 +52,5 @@
             android:paddingHorizontal="32dp"
             android:layout_marginBottom="24dp"/>
 
-        <!-- Ingreso de codigo de recuperacion-->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="INGRESE CÓDIGO"
-            android:textColor="@color/bg_gris_40"
-            android:layout_marginBottom="8dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="[ _ ] [ _ ] [ _ ] [ _ ]"
-            android:textSize="24sp"
-            android:textColor="@color/bg_gris_40"
-            android:layout_marginBottom="8dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="59 Segundos"
-            android:textColor="@color/bg_gris_50" />
-
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
