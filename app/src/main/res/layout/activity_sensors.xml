@@ -22,13 +22,13 @@
             android:textSize="18sp"
             android:textColor="@color/bg_gris_80"
             android:textStyle="bold"
-            android:layout_marginBottom="32dp" />
+            android:layout_marginBottom="24dp" />
 
         <!-- Tarjeta de Temperatura -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="12dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="2dp"
             app:cardBackgroundColor="@color/bg_gris_10">
@@ -37,28 +37,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="20dp"
+                android:padding="16dp"
                 android:gravity="center_vertical">
-
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@android:drawable/ic_menu_compass"
                     android:layout_marginEnd="16dp" />
-
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical">
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Sensor de Temperatura"
                         android:textSize="14sp"
                         android:textColor="@color/bg_gris_60" />
-
                     <TextView
                         android:id="@+id/tvTempValor"
                         android:layout_width="wrap_content"
@@ -84,28 +80,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="20dp"
+                android:padding="16dp"
                 android:gravity="center_vertical">
-
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@android:drawable/ic_menu_manage"
                     android:layout_marginEnd="16dp" />
-
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical">
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Sensor de Humedad"
                         android:textSize="14sp"
                         android:textColor="@color/bg_gris_60" />
-
                     <TextView
                         android:id="@+id/tvHumedadValor"
                         android:layout_width="wrap_content"
@@ -115,6 +107,44 @@
                         android:textStyle="bold"
                         android:textColor="@color/bg_muni" />
                 </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+      <androidx.cardview.widget.CardView
+            android:id="@+id/cvLinterna"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@color/bg_gris_10"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="20dp">
+
+                <ImageView
+                    android:id="@+id/ivLinterna"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/light"
+                    android:layout_marginBottom="12dp" />
+
+                <TextView
+                    android:id="@+id/tvLinternaEstado"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Linterna: OFF"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/bg_gris_80" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
