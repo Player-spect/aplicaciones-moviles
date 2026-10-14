@@ -14,7 +14,7 @@ class SplashActivity : AppCompatActivity() {
 
         // Lógica del Temporizador
         lifecycleScope.launch {
-            delay(7000)
+            delay(1000)
             val intent = Intent(this@SplashActivity, MainActivity::class.java)
             startActivity(intent)
             finish()
