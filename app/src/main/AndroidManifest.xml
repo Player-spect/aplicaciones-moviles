@@ -97,6 +97,14 @@
                 android:label="@string/title_activity_portafolio"
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar"
                 android:windowSoftInputMode="adjustResize" />
+
+
+        <activity
+                android:name=".EditUserActivity"
+                android:exported="false"
+                android:label="EditUser"
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+                android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

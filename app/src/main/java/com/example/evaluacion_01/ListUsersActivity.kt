@@ -40,11 +40,14 @@ class ListUsersActivity : AppCompatActivity() {
             emptyList(),
             onEditarClick = { usuario ->
                 // TODO: Aquí abriremos la pantalla de Modificar más adelante
-                SweetAlertDialog(this, SweetAlertDialog.NORMAL_TYPE)
-                    .setTitleText("Modificar Usuario")
-                    .setContentText("Editando a ${usuario.nombres}")
-                    .setConfirmButton("Aceptar") { it.dismissWithAnimation() }
-                    .show()
+               // Abrimos la pantalla de edición y le pasamos los datos actuales
+                val intent = Intent(this, EditUserActivity::class.java)
+                intent.putExtra("id_usuario", usuario.id)
+                intent.putExtra("nombres", usuario.nombres)
+                intent.putExtra("apellidos", usuario.apellidos)
+                intent.putExtra("email", usuario.email)
+                startActivity(intent)
+
             },
             onEliminarClick = { usuario ->
                 confirmarEliminacion(usuario)
