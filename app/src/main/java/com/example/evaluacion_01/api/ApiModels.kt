@@ -1,8 +1,5 @@
 package com.example.evaluacion_01.api
 
-// package com.example.evaluacion_01
-
-// Modelo genérico para respuestas simples (ej. Registro, Recuperar, Eliminar)
 data class BasicResponse(
     val success: Boolean,
     val message: String
@@ -34,7 +31,6 @@ data class UsuarioApi(
     val email: String
 )
 
-// Modelo para los sensores (Ajusta los nombres según lo que devuelva www.pnk.cl)
 data class SensorResponse(
     val temperatura: String,
     val humedad: String

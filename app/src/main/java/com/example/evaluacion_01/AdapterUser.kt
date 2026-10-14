@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.evaluacion_01.api.UsuarioApi // Importa tu modelo de Retrofit
 
 class AdapterUser(
-    private var listaUsuarios: List<Usuario>,
-    private val onEditarClick: (Usuario) -> Unit,
-    private val onEliminarClick: (Usuario) -> Unit
+    private var listaUsuarios: List<UsuarioApi>, // Cambiado a UsuarioApi
+    private val onEditarClick: (UsuarioApi) -> Unit, // Cambiado a UsuarioApi
+    private val onEliminarClick: (UsuarioApi) -> Unit // Cambiado a UsuarioApi
 ) : RecyclerView.Adapter<AdapterUser.UsuarioViewHolder>() {
 
     class UsuarioViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -21,6 +22,7 @@ class AdapterUser(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UsuarioViewHolder {
+        // Usa tu propio diseño XML (usuario.xml)
         val view = LayoutInflater.from(parent.context).inflate(R.layout.usuario, parent, false)
         return UsuarioViewHolder(view)
     }
@@ -36,7 +38,7 @@ class AdapterUser(
 
     override fun getItemCount(): Int = listaUsuarios.size
 
-    fun actualizarLista(nuevaLista: List<Usuario>) {
+    fun actualizarLista(nuevaLista: List<UsuarioApi>) { // Cambiado a UsuarioApi
         listaUsuarios = nuevaLista
         notifyDataSetChanged()
     }
