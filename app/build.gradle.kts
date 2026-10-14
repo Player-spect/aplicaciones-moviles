@@ -57,4 +57,9 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     implementation("com.airbnb.android:lottie:6.7.1")
     implementation("com.github.f0ris.sweetalert:library:1.6.2")
+    // Consumo de API
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+
 }

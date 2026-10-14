@@ -2,6 +2,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Permiso para conectarse a tu API en AWS y a la API de sensores -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Permiso para detectar si hay WiFi o Datos Móviles (Para el Desafío Offline) -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- Permiso y característica para usar la linterna real del teléfono -->
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera.flash" android:required="false" />
+    <uses-feature
+            android:name="android.hardware.camera"
+            android:required="false" />
+
     <application
             android:allowBackup="true"
             android:dataExtractionRules="@xml/data_extraction_rules"
