@@ -23,11 +23,12 @@
             android:layout_marginBottom="12dp" />
 
         <!-- Fecha y Hora Actual -->
-        <TextView
+        <TextClock
             android:id="@+id/tvFechaHora"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fecha/Hora: 16-10-2025, 20:25:30"
+            android:format12Hour="'Fecha/Hora: 'dd-MM-yyyy, HH:mm:ss"
+            android:format24Hour="'Fecha/Hora: 'dd-MM-yyyy, HH:mm:ss"
             android:textSize="14sp"
             android:textColor="@color/bg_gris_70"
             android:layout_marginBottom="32dp" />
