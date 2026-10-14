@@ -1,110 +1,134 @@
 package com.example.evaluacion_01
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import cn.pedant.SweetAlert.SweetAlertDialog
-import com.example.evaluacion_01.api.RetrofitClient // Asegúrate de que apunte a tu Retrofit
+import com.example.evaluacion_01.api.RetrofitClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class EditUserActivity : AppCompatActivity() {
 
-    private var idUsuario: Int = -1
+    private lateinit var etNombres: EditText
+    private lateinit var etApellidos: EditText
+    private lateinit var etEmail: EditText
+    private lateinit var btnGuardar: Button
+    private lateinit var dbHelper: DatabaseHelper
+    private lateinit var networkHelper: NetworkHelper
+
+    private var usuarioId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_users)
+        setContentView(R.layout.activity_edit_user) // Asegúrate de que coincida con tu XML de edición
 
-        val etNombres = findViewById<EditText>(R.id.etEditNombres)
-        val etApellidos = findViewById<EditText>(R.id.etEditApellidos)
-        val etEmail = findViewById<EditText>(R.id.etEditEmail)
-        val btnGuardar = findViewById<Button>(R.id.btnGuardarCambios)
+        dbHelper = DatabaseHelper(this)
+        networkHelper = NetworkHelper(this)
 
-        // 1. Recibir los datos enviados desde la lista
-        idUsuario = intent.getIntExtra("id_usuario", -1)
-        etNombres.setText(intent.getStringExtra("nombres"))
-        etApellidos.setText(intent.getStringExtra("apellidos"))
-        etEmail.setText(intent.getStringExtra("email"))
+        etNombres = findViewById(R.id.etEditNombres) // Ajusta los IDs según tu XML
+        etApellidos = findViewById(R.id.etEditApellidos)
+        etEmail = findViewById(R.id.etEditEmail)
+        btnGuardar = findViewById(R.id.btnGuardarCambios)
 
-        // 2. Lógica para guardar cambios
+        // Recibimos los datos pasados desde el intent del adaptador
+        usuarioId = intent.getIntExtra("id_usuario", 0)
+        etNombres.setText(intent.getStringExtra("nombres") ?: "")
+        etApellidos.setText(intent.getStringExtra("apellidos") ?: "")
+        etEmail.setText(intent.getStringExtra("email") ?: "")
+
         btnGuardar.setOnClickListener {
-            val nombres = etNombres.text.toString().trim()
-            val apellidos = etApellidos.text.toString().trim()
-            val email = etEmail.text.toString().trim()
-
-            // Validaciones (Requisito de la rúbrica)
-            if (nombres.isEmpty() || apellidos.isEmpty() || email.isEmpty()) {
-                mostrarAlerta("Campos vacíos", "Todos los campos son obligatorios.")
-                return@setOnClickListener
-            }
-
-            if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                mostrarAlerta("Correo inválido", "Por favor, ingrese un formato de correo válido.")
-                return@setOnClickListener
-            }
-
-            actualizarUsuarioEnAWS(nombres, apellidos, email)
+            guardarCambiosOfflineFirst()
         }
     }
 
-    private fun actualizarUsuarioEnAWS(nombres: String, apellidos: String, email: String) {
-        val pDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
-        pDialog.progressHelper.barColor = android.graphics.Color.parseColor("#A5DC86")
-        pDialog.titleText = "Guardando cambios..."
-        pDialog.setCancelable(false)
-        pDialog.show()
+    private fun guardarCambiosOfflineFirst() {
+        val nuevosNombres = etNombres.text.toString().trim()
+        val nuevosApellidos = etApellidos.text.toString().trim()
+        val nuevoEmail = etEmail.text.toString().trim()
 
-        lifecycleScope.launch(Dispatchers.IO) {
-            try {
-                // Como tu ApiService espera un Map<String, String>, enviamos el ID convertido a String
-                val requestParams = mapOf(
-                    "id" to idUsuario.toString(),
-                    "nombres" to nombres,
-                    "apellidos" to apellidos,
-                    "email" to email
-                )
-
-                val response = RetrofitClient.apiServiceAws.modificarUsuario(requestParams)
-
-                withContext(Dispatchers.Main) {
-                    pDialog.dismissWithAnimation()
-                    if (response.isSuccessful && response.body() != null) {
-                        val body = response.body()!!
-                        if (body.success) {
-                            SweetAlertDialog(this@EditUserActivity, SweetAlertDialog.SUCCESS_TYPE)
-                                .setTitleText("¡Actualizado!")
-                                .setContentText("El usuario fue modificado exitosamente.")
-                                .setConfirmButton("Aceptar") { sDialog ->
-                                    sDialog.dismissWithAnimation()
-                                    finish() // Cierra esta pantalla y vuelve a la lista
-                                }
-                                .show()
-                        } else {
-                            mostrarAlerta("Error al actualizar", body.message)
-                        }
-                    } else {
-                        mostrarAlerta("Error del servidor", "El servidor no respondió correctamente.")
-                    }
-                }
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    pDialog.dismissWithAnimation()
-                    Log.e("EditUserActivity", "Error de red", e)
-                    mostrarAlerta("Sin Conexión", "No se pudo conectar al servidor AWS.")
-                }
-            }
+        if (nuevosNombres.isEmpty() || nuevosApellidos.isEmpty() || nuevoEmail.isEmpty()) {
+            SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                .setTitleText("Campos vacíos")
+                .setContentText("Por favor completa todos los campos.")
+                .show()
+            return
         }
-    }
 
-    private fun mostrarAlerta(titulo: String, mensaje: String) {
-        SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-            .setTitleText(titulo)
-            .setContentText(mensaje)
+        // 1. Guardamos el cambio en SQLite localmente (Actualiza estado a 2 o mantiene 1)
+        dbHelper.updateUserOffline(usuarioId, nuevosNombres, nuevosApellidos, nuevoEmail, isRemote = true)
+
+        SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+            .setTitleText("Guardado con exito")
+            .setContentText("Los cambios se han realizado con exito.")
+            .setConfirmClickListener {
+                it.dismissWithAnimation()
+                finish() // Regresar a la lista
+            }
             .show()
+
+        // 2. Si hay red, intentamos sincronizar de inmediato con AWS
+        if (networkHelper.isNetworkAvailable()) {
+            sincronizarPendientesConAws()
+        }
+    }
+
+    private fun sincronizarPendientesConAws() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            val pendientes = dbHelper.getPendingSyncUsers()
+            for (cv in pendientes) {
+                val syncStatus = cv.getAsInteger(DatabaseHelper.COLUMN_SYNC_STATUS)
+                val remoteId = cv.getAsInteger(DatabaseHelper.COLUMN_ID)
+                val localId = cv.getAsInteger(DatabaseHelper.COLUMN_LOCAL_ID)
+                val nombres = cv.getAsString(DatabaseHelper.COLUMN_NOMBRES)
+                val apellidos = cv.getAsString(DatabaseHelper.COLUMN_APELLIDOS)
+                val email = cv.getAsString(DatabaseHelper.COLUMN_EMAIL)
+                val passwordHash = cv.getAsString(DatabaseHelper.COLUMN_PASSWORD_HASH)
+
+                try {
+                    when (syncStatus) {
+                        1 -> { // Pendiente de Insertar
+                            val requestMap = mapOf(
+                                "nombres" to (nombres ?: ""),
+                                "apellidos" to (apellidos ?: ""),
+                                "email" to (email ?: ""),
+                                "password" to (passwordHash ?: "")
+                            )
+                            val response = RetrofitClient.apiServiceAws.registrarUsuario(requestMap)
+                            if (response.isSuccessful && response.body()?.success == true) {
+                                dbHelper.updateSyncStatusAfterSync(localId, remoteId = 0, newStatus = 0)
+                            }
+                        }
+                        2 -> { // Pendiente de Actualizar
+                            if (remoteId != null && remoteId > 0) {
+                                val requestMap = mapOf(
+                                    "id" to remoteId,
+                                    "nombres" to (nombres ?: ""),
+                                    "apellidos" to (apellidos ?: ""),
+                                    "email" to (email ?: "")
+                                )
+                                val response = RetrofitClient.apiServiceAws.modificarUsuario(requestMap)
+                                if (response.isSuccessful && response.body()?.success == true) {
+                                    dbHelper.updateSyncStatusAfterSync(localId, remoteId, newStatus = 0)
+                                }
+                            }
+                        }
+                        3 -> { // Pendiente de Eliminar
+                            if (remoteId != null && remoteId > 0) {
+                                val requestMap = mapOf("id" to remoteId)
+                                RetrofitClient.apiServiceAws.eliminarUsuario(requestMap)
+                                val db = dbHelper.writableDatabase
+                                db.delete(DatabaseHelper.TABLE_USERS, "${DatabaseHelper.COLUMN_LOCAL_ID} = ?", arrayOf(localId.toString()))
+                                db.close()
+                            }
+                        }
+                    }
+                } catch (e: Exception) {
+                    // Si falla la red de fondo, se reintentará en el próximo ciclo
+                }
+            }
+        }
     }
 }

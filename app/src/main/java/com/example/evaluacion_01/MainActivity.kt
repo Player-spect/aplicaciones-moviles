@@ -36,13 +36,13 @@ class MainActivity : AppCompatActivity() {
 
             // Validacion Campos vacíos
             if (email.isEmpty() || password.isEmpty()) {
-                show_error_alert("¡Error!", "Todos los campos son obligatorios")
+                showErrorAlert("¡Error!", "Todos los campos son obligatorios")
                 return@setOnClickListener
             }
 
             // Validacion Formato de Email
             if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                show_error_alert("Formato Inválido", "Por favor ingresa un correo válido")
+                showErrorAlert("Formato Inválido", "Por favor ingresa un correo válido")
                 return@setOnClickListener
             }
 
@@ -100,14 +100,14 @@ class MainActivity : AppCompatActivity() {
                                 }
                             }
                             // Usar tu función personalizada de error
-                            show_error_alert("Datos incorrectos", errorMsg)
+                            showErrorAlert("Datos incorrectos", errorMsg)
                         }
                     }
                 } catch (e: Exception) {
                     withContext(Dispatchers.Main) {
                         pDialog.dismissWithAnimation()
                         Log.e("MainActivity", "Error de red", e)
-                        show_error_alert("Sin Conexión", "No se pudo conectar con el servidor AWS.")
+                        showErrorAlert("Sin Conexión", "No se pudo conectar con el servidor AWS.")
                     }
                 }
             }
@@ -127,7 +127,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Sweet_Alert
-    private fun show_error_alert(titulo: String, mensaje: String) {
+    private fun showErrorAlert(titulo: String, mensaje: String) {
         SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
             .setTitleText(titulo)
             .setContentText(mensaje)

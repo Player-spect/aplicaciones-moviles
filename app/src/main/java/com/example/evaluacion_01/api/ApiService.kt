@@ -29,7 +29,8 @@ interface ApiService {
     suspend fun listarUsuarios(): Response<ListUsersResponse>
 
     @PUT("users/modificar.php")
-    suspend fun modificarUsuario(@Body request: Map<String, String>): Response<BasicResponse>
+    @JvmSuppressWildcards
+    suspend fun modificarUsuario(@Body request: Map<String, Any>): Response<BasicResponse>
 
     // Usamos @HTTP con DELETE porque Retrofit no permite @Body en @DELETE por defecto
     @HTTP(method = "DELETE", path = "users/eliminar.php", hasBody = true)

@@ -6,6 +6,9 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import cn.pedant.SweetAlert.SweetAlertDialog
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class RegisterUsersActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,10 +37,27 @@ class RegisterUsersActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Generar un nuevo ID basado en el tamaño de la lista
-            val nuevoId = db.listaUsuarios.size + 1
-            val nuevoUsuario = Usuario(nuevoId, nombres, apellidos, email, clave)
-            db.listaUsuarios.add(nuevoUsuario)
+            if (!isClaveRobusta(clave)) {
+                mostrarAlerta(
+                    "Contraseña débil",
+                    "La contraseña debe tener al menos 8 caracteres, incluir una mayúscula, una minúscula, un número y un carácter especial."
+                )
+                return@setOnClickListener
+            }
+
+            // Generar username basado en el email
+            val username = email.substringBefore("@")
+            val createdAt = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
+
+            val dbHelper = DatabaseHelper(this@RegisterUsersActivity)
+            dbHelper.insertUserOffline(
+                username = username,
+                nombres = nombres,
+                apellidos = apellidos,
+                email = email,
+                passwordHash = clave,
+                createdAt = createdAt
+            )
 
             SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
                 .setTitleText("¡Guardado!")
@@ -55,5 +75,11 @@ class RegisterUsersActivity : AppCompatActivity() {
             .setTitleText(titulo)
             .setContentText(mensaje)
             .show()
+    }
+
+    private fun isClaveRobusta(clave: String): Boolean {
+        // Al menos 8 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un carácter especial
+        val regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%^&+=!])(?=\\S+$).{8,}$".toRegex()
+        return regex.matches(clave)
     }
 }
